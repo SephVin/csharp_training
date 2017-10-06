@@ -48,7 +48,7 @@ namespace WebAddressbookTests
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
             InitContactCreation();
-            FillContactForm(new ContactsData("Evgeniy", "Ivanov"));
+            FillContactForm(new ContactData("Evgeniy", "Ivanov"));
             SubmitContactCreation();
             ReturnToContactsPage();
             Logout();
@@ -73,7 +73,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        private void FillContactForm(ContactsData contact)
+        private void FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);

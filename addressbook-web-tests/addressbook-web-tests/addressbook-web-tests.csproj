@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="AccountData.cs" />
     <Compile Include="ContactCreationTests.cs" />
-    <Compile Include="ContactsData.cs" />
+    <Compile Include="ContactData.cs" />
     <Compile Include="GroupData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroupCreationTests.cs" />
