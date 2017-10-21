@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -19,6 +20,8 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
         public ApplicationManager()
         {
             FirefoxOptions options = new FirefoxOptions();
@@ -33,15 +36,18 @@ namespace WebAddressbookTests
             contactHelper = new ContactHelper(this);
         }
 
-        public IWebDriver Driver
+        public static ApplicationManager GetInstance()
         {
-            get
+            if (!app.IsValueCreated)
             {
-                return driver;
+                ApplicationManager newInstance = new ApplicationManager();
+                app.Value = newInstance;
+                newInstance.Navigator.OpenHomePage();
             }
+            return app.Value; 
         }
 
-        public void Stop()
+        ~ApplicationManager()
         {
             try
             {
@@ -50,6 +56,14 @@ namespace WebAddressbookTests
             catch (Exception)
             {
                 // Ignore errors if unable to close the browser
+            }
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
             }
         }
 
