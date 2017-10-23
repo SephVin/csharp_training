@@ -9,6 +9,12 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupRemovalTests : AuthTestBase
     {
+        [SetUp]
+        public void Init()
+        {
+            app.Groups.CreateIfNotExist();
+        }
+
         [Test]
         public void GroupRemovalTest()
         {

@@ -92,17 +92,6 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            if (IsGroupExist() == false)
-            {
-                GroupData data = new GroupData("aaa")
-                {
-                    Header = "bbb",
-                    Footer = "ccc"
-                };
-
-                Create(data);
-            }
-
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
 
             return this;
@@ -117,6 +106,24 @@ namespace WebAddressbookTests
         public bool IsGroupExist()
         {
             return IsElementPresent(By.Name("selected[]"));
+        }
+
+        public GroupHelper CreateIfNotExist()
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            if (IsGroupExist() == false)
+            {
+                GroupData data = new GroupData("aaa")
+                {
+                    Header = "bbb",
+                    Footer = "ccc"
+                };
+
+                Create(data);
+            }
+
+            return this;
         }
     }
 }

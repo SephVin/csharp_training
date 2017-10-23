@@ -31,13 +31,6 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenHomePage();
 
-            if (IsContactExist() == false)
-            {
-                ContactData data = new ContactData("Sergei", "Sidorov");
-
-                Create(data);
-            }
-
             InitContactModification(index);
             FillContactForm(newData);
             SubmitContactModification();
@@ -99,13 +92,6 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            if(IsContactExist() == false)
-            {
-                ContactData data = new ContactData("Sergei", "Sidorov");
-
-                Create(data);
-            }
-
             driver.FindElements(By.Name("entry"))[index]
                   .FindElements(By.TagName("td"))[0]
                   .FindElement(By.Name("selected[]")).Click();
@@ -124,6 +110,20 @@ namespace WebAddressbookTests
         public bool IsContactExist()
         {
             return IsElementPresent(By.Name("entry"));
+        }
+
+        public ContactHelper CreateIfNotExist()
+        {
+            manager.Navigator.OpenHomePage();
+
+            if (IsContactExist() == false)
+            {
+                ContactData data = new ContactData("Sergei", "Sidorov");
+
+                Create(data);
+            }
+
+            return this;
         }
     }
 }
