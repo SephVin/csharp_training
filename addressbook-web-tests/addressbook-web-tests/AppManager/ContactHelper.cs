@@ -232,6 +232,28 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactData GetContactInformationFromDetailsForm(int index)
+        {
+            manager.Navigator.OpenHomePage();
+
+            driver.FindElements(By.Name("entry"))[index]
+                  .FindElements(By.TagName("td"))[6]
+                  .FindElement(By.TagName("a")).Click();
+
+            var contactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
+            string[] lines = contactDetails.Split(new[] { "\r\n\r\n", "\r\n" }, StringSplitOptions.None);
+            List<string> details = new List<string>();
+            foreach (string line in lines)
+            {
+                details.Add(line);
+            }
+
+            return new ContactData(null, null)
+            {
+                ContactDetails = details
+            };
+        }
+
         public int GetNumberOfSearchResults()
         {
             manager.Navigator.OpenHomePage();

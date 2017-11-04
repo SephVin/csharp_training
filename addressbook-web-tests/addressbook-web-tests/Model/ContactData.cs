@@ -11,6 +11,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private List<string> contactDetails;
 
         public ContactData(string firstName, string lastName)
         {
@@ -73,6 +74,36 @@ namespace WebAddressbookTests
             set
             {
                 allPhones = value;
+            }
+        }
+
+        public List<string> ContactDetails
+        {
+            get
+            {
+                if (contactDetails != null)
+                {
+                    return contactDetails;
+                }
+                else
+                {
+                    List<string> result = new List<string>();
+
+                    if (FirstName != null)
+                    {
+                        result.Add(FirstName);
+                    }
+                    if (LastName != null)
+                    {
+                        result.Add(LastName);
+                    }
+
+                    return result;
+                }
+            }
+            set
+            {
+                contactDetails = value;
             }
         }
 
