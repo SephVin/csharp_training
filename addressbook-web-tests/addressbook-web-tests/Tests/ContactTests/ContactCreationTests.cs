@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         {
             ContactData contact = new ContactData("Evgeniy", "Ivanov")
             {
-                Address = "Неизвестный адрес",
+                Address = "г.Екатеринбург, ул.Ленина, д.29, кв.7",
                 HomePhone = "+7(952) 321-43-65",
                 WorkPhone = "8(34365) 2 48 52",
                 MobilePhone = "7 952 543 12 54",

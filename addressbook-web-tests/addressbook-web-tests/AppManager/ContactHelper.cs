@@ -132,7 +132,16 @@ namespace WebAddressbookTests
 
             if (IsContactExist() == false)
             {
-                ContactData data = new ContactData("Sergei", "Sidorov");
+                ContactData data = new ContactData("Sergei", "Sidorov")
+                {
+                    Address = "г.Екатеринбург, ул.Ленина, д.29, кв.7",
+                    HomePhone = "+7(952) 321-43-65",
+                    WorkPhone = "8(34365) 2 48 52",
+                    MobilePhone = "7 952 543 12 54",
+                    Email = "   email@bk.ru ",
+                    Email2 = "testemail@test.ru",
+                    Email3 = "anotheremail@test.ru"
+                };
 
                 Create(data);
             }
