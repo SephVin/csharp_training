@@ -29,6 +29,14 @@ namespace WebAddressbookTests
             }
         }
 
+        public void SelectElement(By locator, string text)
+        {
+            if (text != null)
+            {
+                new SelectElement(driver.FindElement(locator)).SelectByText(text);
+            }
+        }
+
         public bool IsElementPresent(By by)
         {
             try

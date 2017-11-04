@@ -29,12 +29,12 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void ContactInformationTest2()
+        public void ContactDetailsInformationTest()
         {
             ContactData fromEditForm = app.Contacts.GetContactInformationFromEditForm(0);
             ContactData fromDetailsForm = app.Contacts.GetContactInformationFromDetailsForm(0);
 
-            //Assert.AreEqual(fromDetailsForm.ContactDetails, fromEditForm.ContactDetails);
+            Assert.AreEqual(fromDetailsForm.ContactDetails, fromEditForm.ContactDetails);
         }
     }
 }

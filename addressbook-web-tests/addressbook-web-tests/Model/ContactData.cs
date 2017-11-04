@@ -23,7 +23,15 @@ namespace WebAddressbookTests
 
         public string FirstName { get; set; }
 
+        public string MiddleName { get; set; }
+
         public string LastName { get; set; }
+
+        public string NickName { get; set; }
+
+        public string Title { get; set;}
+
+        public string Company { get; set; }
 
         public string Address { get; set; }
 
@@ -33,11 +41,33 @@ namespace WebAddressbookTests
 
         public string WorkPhone { get; set; }
 
+        public string Fax { get; set; }
+
         public string Email { get; set; }
 
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
+
+        public string HomePage { get; set; }
+
+        public string BirthDay { get; set; }
+
+        public string BirthMonth { get; set; }
+
+        public string BirthYear { get; set; }
+
+        public string AnniDay { get; set; }
+
+        public string AnniMonth { get; set; }
+
+        public string AnniYear { get; set; }
+
+        public string SecondaryAddress { get; set; }
+
+        public string SecondaryHomePhone { get; set; }
+
+        public string Notes { get; set; }
 
         public string AllEmails
         {
@@ -68,7 +98,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUpPhone(HomePhone) + CleanUpPhone(MobilePhone) + CleanUpPhone(WorkPhone)).Trim();
+                    return (CleanUpPhone(HomePhone) + CleanUpPhone(MobilePhone) + CleanUpPhone(WorkPhone) + CleanUpPhone(SecondaryHomePhone)).Trim();
                 }
             }
             set
@@ -88,14 +118,46 @@ namespace WebAddressbookTests
                 else
                 {
                     List<string> result = new List<string>();
+                    StringBuilder str = new StringBuilder();
 
-                    if (FirstName != null)
+                    AddContactDetailsToOneString(str, FirstName);
+                    AddContactDetailsToOneString(str, MiddleName);
+                    AddContactDetailsToOneString(str, LastName);
+                    CleanUpFioStringAndAddToResult(str, result);
+
+                    AddContactDetailsToResult(result, NickName);                      
+
+                    AddContactDetailsToResult(result, Title);
+                    AddContactDetailsToResult(result, Company);
+                    AddContactDetailsToResult(result, Address);
+
+                    AddContactDetailsToResult(result, HomePhone);
+                    AddContactDetailsToResult(result, MobilePhone);
+                    AddContactDetailsToResult(result, WorkPhone);
+                    AddContactDetailsToResult(result, Fax);
+
+                    AddContactDetailsToResult(result, Email);
+                    AddContactDetailsToResult(result, Email2);
+                    AddContactDetailsToResult(result, Email3);
+                    AddContactDetailsToResult(result, HomePage);
+
+                    AddContactDetailsToOneString(str, BirthDay);
+                    AddContactDetailsToOneString(str, BirthMonth);
+                    AddContactDetailsToOneString(str, BirthYear);
+                    CleanUpBirthDateAndAddToResult(str, result);
+
+                    AddContactDetailsToOneString(str, AnniDay);
+                    AddContactDetailsToOneString(str, AnniMonth);
+                    AddContactDetailsToOneString(str, AnniYear);
+                    CleanUpAnniDateAndAddToResult(str, result);
+
+                    AddContactDetailsToResult(result, SecondaryAddress);
+                    AddContactDetailsToResult(result, SecondaryHomePhone);
+                    AddContactDetailsToResult(result, Notes);
+
+                    if (result.Count == 0)
                     {
-                        result.Add(FirstName);
-                    }
-                    if (LastName != null)
-                    {
-                        result.Add(LastName);
+                        result.Add("");
                     }
 
                     return result;
@@ -107,7 +169,59 @@ namespace WebAddressbookTests
             }
         }
 
-        public string CleanUpEmail(string email)
+        private void AddContactDetailsToOneString(StringBuilder str, string property)
+        {
+            if (property == FirstName || property == LastName || property == MiddleName)
+            {
+                if (!string.IsNullOrEmpty(property))
+                {
+                    str.Append(property + " ");
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(property) && (!property.Equals("0") && !property.Equals("-")))
+                {
+                    if (property == BirthDay || property == AnniDay)
+                        str.Append(property + ". ");
+                    if (property == BirthMonth || property == AnniMonth)
+                        str.Append(property + " ");
+                    if (property == BirthYear || property == AnniYear)
+                    {
+                        str.Append(property + " ");
+                        str.Append(string.Format("({0})", (DateTime.Now.Year - int.Parse(property))));
+                    }
+                }
+            }
+        }
+
+        private void AddContactDetailsToResult(List<string> result, string property)
+        {
+            if (!string.IsNullOrEmpty(property))
+            {
+                if (property == HomePhone)
+                    result.Add("H: " + property);
+                else if (property == MobilePhone)
+                    result.Add("M: " + property);
+                else if (property == WorkPhone)
+                    result.Add("W: " + property);
+                else if (property == Fax)
+                    result.Add("F: " + property);
+                else if (property == SecondaryHomePhone)
+                    result.Add("P: " + property);
+                else if (property == Email || property == Email2 || property == Email3)
+                    result.Add(property.Trim());
+                else if (property == HomePage)
+                {
+                    result.Add("Homepage:");
+                    result.Add(property.Replace("http://", ""));
+                }
+                else
+                    result.Add(property);
+            }
+        }
+
+        private string CleanUpEmail(string email)
         {
             if (email == null || email == "")
             {
@@ -125,6 +239,32 @@ namespace WebAddressbookTests
             }
 
             return Regex.Replace(phone, "[() -]", "") + "\r\n";
+        }
+
+        private void CleanUpFioStringAndAddToResult(StringBuilder str, List<string> result)
+        {
+            if (str.Length > 1)
+            {
+                result.Add(str.ToString().Trim());
+            }
+            str.Clear();
+        }
+
+        private void CleanUpBirthDateAndAddToResult(StringBuilder str, List<string> result)
+        {
+            if (str.Length > 1)
+            {
+                result.Add("Birthday " + str.ToString().Trim());
+            }
+            str.Clear();
+        }
+
+        private void CleanUpAnniDateAndAddToResult(StringBuilder str, List<string> result)
+        {
+            if (str.Length > 1)
+            {
+                result.Add("Anniversary " + str.ToString().Trim());
+            }
         }
 
         public bool Equals(ContactData other)

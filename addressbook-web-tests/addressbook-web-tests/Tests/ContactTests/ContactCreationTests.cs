@@ -15,13 +15,34 @@ namespace WebAddressbookTests
         {
             ContactData contact = new ContactData("Evgeniy", "Ivanov")
             {
+                MiddleName = "Sergeevich",
+                NickName = "SephVin",
+
+                Company = "SKB Kontur",
+                Title = "TitleName",                
                 Address = "г.Екатеринбург, ул.Ленина, д.29, кв.7",
+
                 HomePhone = "+7(952) 321-43-65",
                 WorkPhone = "8(34365) 2 48 52",
                 MobilePhone = "7 952 543 12 54",
+                Fax = "666 777",
+
                 Email = "   email@bk.ru ",
                 Email2 = "testemail@test.ru",
-                Email3 = "anotheremail@test.ru"
+                Email3 = "anotheremail@test.ru",
+                HomePage = "http://testpage.ru",
+
+                BirthDay = "5",
+                BirthMonth = "February",
+                BirthYear = "1991",
+
+                AnniDay = "5",
+                AnniMonth = "February",
+                AnniYear = "1991",
+
+                SecondaryAddress = "г.Асбест, ул.Мира, д.8, кв.88",
+                SecondaryHomePhone = "нет",
+                Notes = "MyNotes"
             };
 
 
