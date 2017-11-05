@@ -10,42 +10,48 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
-        [Test]
-        public void ContactCreationTest()
+        public static IEnumerable<ContactData> RandomContactDataProvider()
         {
-            ContactData contact = new ContactData("Evgeniy", "Ivanov")
+            List<ContactData> contacts = new List<ContactData>();
+            for (int i = 0; i < 5; i++)
             {
-                MiddleName = "Sergeevich",
-                NickName = "SephVin",
+                contacts.Add(new ContactData(GenerateRandomString(15), GenerateRandomString(15))
+                {
+                    MiddleName = GenerateRandomString(15),
+                    NickName = GenerateRandomString(15),
 
-                Company = "SKB Kontur",
-                Title = "TitleName",                
-                Address = "г.Екатеринбург, ул.Ленина, д.29, кв.7",
+                    Company = GenerateRandomString(30),
+                    Title = GenerateRandomString(10),
+                    Address = GenerateRandomString(100),
 
-                HomePhone = "+7(952) 321-43-65",
-                WorkPhone = "8(34365) 2 48 52",
-                MobilePhone = "7 952 543 12 54",
-                Fax = "666 777",
+                    HomePhone = GetRandomPhone(),
+                    WorkPhone = GetRandomPhone(),
+                    MobilePhone = GetRandomPhone(),
+                    Fax = GenerateRandomString(15),
 
-                Email = "   email@bk.ru ",
-                Email2 = "testemail@test.ru",
-                Email3 = "anotheremail@test.ru",
-                HomePage = "http://testpage.ru",
+                    Email = GenerateRandomEmail(15),
+                    Email2 = GenerateRandomEmail(15),
+                    Email3 = GenerateRandomEmail(15),
+                    HomePage = GenerateRandomHomePage(10),
+                    BirthDay = GenerateRandomDay(),
+                    BirthMonth = GenerateRandomMonth(),
+                    BirthYear = GenerateRandomYear(),
 
-                BirthDay = "5",
-                BirthMonth = "February",
-                BirthYear = "1991",
+                    AnniDay = GenerateRandomDay(),
+                    AnniMonth = GenerateRandomMonth(),
+                    AnniYear = GenerateRandomYear(),
 
-                AnniDay = "5",
-                AnniMonth = "February",
-                AnniYear = "1991",
+                    SecondaryAddress = GenerateRandomString(100),
+                    SecondaryHomePhone = GetRandomPhone(),
+                    Notes = GenerateRandomString(100)
+                });
+            }
+            return contacts;
+        }
 
-                SecondaryAddress = "г.Асбест, ул.Мира, д.8, кв.88",
-                SecondaryHomePhone = "нет",
-                Notes = "MyNotes"
-            };
-
-
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactCreationTest(ContactData contact)
+        {
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create(contact);

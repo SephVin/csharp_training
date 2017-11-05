@@ -315,7 +315,14 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return string.Format("LastName: {0}, FirstName: {1}", LastName, FirstName);
+            return string.Format("LastName: {0}\nFirstName: {1}\nMiddleName: {2}\nNickName: {3}\n" +
+                                 "Company: {4}\nTitle: {5}\nAddress: {6}\nHomePhone: {7}\nWorkPhone: {8}\n" +
+                                 "MobilePhone: {9}\nFax: {10}\nEmail: {11}\nEmail2: {12}\nEmail3: {13}\nHomePage: {14}\n" +
+                                 "BirthDay: {15}\nBirthMonth: {16}\nBirthYear: {17}\nAnniDay: {18}\nAnniMonth: {19}\n" +
+                                 "AnniYear: {20}\nSecondaryAddress: {21}\nSecondaryHomePhone: {22}\nNotes: {23}", 
+                                 LastName, FirstName, MiddleName, NickName, Company, Title, Address, HomePhone,
+                                 WorkPhone, MobilePhone, Fax, Email, Email2, Email3, HomePage, BirthDay, BirthMonth,
+                                 BirthYear, AnniDay, AnniMonth, AnniYear, SecondaryAddress, SecondaryHomePhone, Notes);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "Name = " + Name;
+            return string.Format("Name: {0}\nHeader: {1}\nFooter: {2}", Name, Header, Footer);
         }
 
         public int CompareTo(GroupData other)
