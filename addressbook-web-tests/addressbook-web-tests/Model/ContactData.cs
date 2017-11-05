@@ -174,8 +174,8 @@ namespace WebAddressbookTests
             if (property == FirstName || property == LastName || property == MiddleName)
             {
                 if (!string.IsNullOrEmpty(property))
-                {
-                    str.Append(property + " ");
+                {                   
+                    str.Append(CleanUpWhiteSpaces(property) + " ");
                 }
             }
             else
@@ -188,8 +188,10 @@ namespace WebAddressbookTests
                         str.Append(property + " ");
                     if (property == BirthYear || property == AnniYear)
                     {
+                        property = CleanUpWhiteSpaces(property);
                         str.Append(property + " ");
-                        str.Append(string.Format("({0})", (DateTime.Now.Year - int.Parse(property))));
+                        if (property.Length == 4)
+                            str.Append(string.Format("({0})", (DateTime.Now.Year - int.Parse(property))));
                     }
                 }
             }
@@ -200,24 +202,24 @@ namespace WebAddressbookTests
             if (!string.IsNullOrEmpty(property))
             {
                 if (property == HomePhone)
-                    result.Add("H: " + property);
+                    result.Add("H: " + CleanUpWhiteSpaces(property));
                 else if (property == MobilePhone)
-                    result.Add("M: " + property);
+                    result.Add("M: " + CleanUpWhiteSpaces(property));
                 else if (property == WorkPhone)
-                    result.Add("W: " + property);
+                    result.Add("W: " + CleanUpWhiteSpaces(property));
                 else if (property == Fax)
-                    result.Add("F: " + property);
+                    result.Add("F: " + CleanUpWhiteSpaces(property));
                 else if (property == SecondaryHomePhone)
-                    result.Add("P: " + property);
+                    result.Add("P: " + CleanUpWhiteSpaces(property));
                 else if (property == Email || property == Email2 || property == Email3)
-                    result.Add(property.Trim());
+                    result.Add(CleanUpWhiteSpaces(property));
                 else if (property == HomePage)
                 {
                     result.Add("Homepage:");
-                    result.Add(property.Replace("http://", ""));
+                    result.Add(CleanUpWhiteSpaces(property).Replace("http://", "").Trim());
                 }
                 else
-                    result.Add(property);
+                    result.Add(CleanUpWhiteSpaces(property));
             }
         }
 
@@ -265,6 +267,12 @@ namespace WebAddressbookTests
             {
                 result.Add("Anniversary " + str.ToString().Trim());
             }
+            str.Clear();
+        }
+
+        private string CleanUpWhiteSpaces(string property)
+        {
+            return property = Regex.Replace(property, @"\s+", " ").Trim();
         }
 
         public bool Equals(ContactData other)

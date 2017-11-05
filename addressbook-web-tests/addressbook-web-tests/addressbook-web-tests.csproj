@@ -88,7 +88,6 @@
     <Compile Include="Tests\Base\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>
