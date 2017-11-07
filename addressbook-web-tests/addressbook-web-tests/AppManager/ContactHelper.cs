@@ -321,18 +321,11 @@ namespace WebAddressbookTests
                   .FindElements(By.TagName("td"))[6]
                   .FindElement(By.TagName("a")).Click();
 
-            var contactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
-            string[] lines = contactDetails.Split(new[] { "\r\n\r\n\r\n", "\r\n\r\n", "\r\n" }, StringSplitOptions.None);
-
-            List<string> details = new List<string>();
-            foreach (string line in lines)
-            {
-                details.Add(line);
-            }
+            string contactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
 
             return new ContactData(null, null)
             {
-                ContactDetails = details
+                ContactDetails = contactDetails
             };
         }
 
