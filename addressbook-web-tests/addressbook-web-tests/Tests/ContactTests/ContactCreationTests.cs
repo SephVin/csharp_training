@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.IO;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -27,7 +28,7 @@ namespace WebAddressbookTests
                     HomePhone = GetRandomPhone(),
                     WorkPhone = GetRandomPhone(),
                     MobilePhone = GetRandomPhone(),
-                    Fax = GenerateRandomString(15),
+                    Fax = GetRandomPhone(),
 
                     Email = GenerateRandomEmail(15),
                     Email2 = GenerateRandomEmail(15),
@@ -46,6 +47,7 @@ namespace WebAddressbookTests
                     Notes = GenerateRandomString(100)
                 });
             }
+
             return contacts;
         }
 
