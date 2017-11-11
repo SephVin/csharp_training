@@ -66,15 +66,17 @@ namespace WebAddressbookTests
             Excel.Workbook wb =  app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"Files\GroupsTestData\groups.xlsx"));
             Excel.Worksheet sheet = wb.Sheets[1];
             Excel.Range range = sheet.UsedRange;
+
             for (int i = 1; i <= range.Rows.Count; i++)
             {
                 groups.Add(new GroupData()
                 {
-                    Name = range.Cells[i, 1].Value,
-                    Header = range.Cells[i, 2].Value,
-                    Footer = range.Cells[i, 3].Value
+                    Name = range.Cells[i, 1].Value.ToString(),
+                    Header = range.Cells[i, 2].Value.ToString(),
+                    Footer = range.Cells[i, 3].Value.ToString()
                 });
             }
+
             wb.Close();
             app.Visible = false;
             app.Quit();
@@ -82,7 +84,7 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        [Test, TestCaseSource("GroupDataFromCsvFile")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
