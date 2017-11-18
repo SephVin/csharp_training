@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
@@ -23,55 +25,83 @@ namespace WebAddressbookTests
             LastName = lastName;
         }
 
+        [Column(Name = "id")]
         public string Id { get; set; }
 
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
 
+        [Column(Name = "middlename")]
         public string MiddleName { get; set; }
 
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
 
+        [Column(Name = "nickname")]
         public string NickName { get; set; }
 
+        [Column(Name = "title")]
         public string Title { get; set; }
 
+        [Column(Name = "company")]
         public string Company { get; set; }
 
+        [Column(Name = "address")]
         public string Address { get; set; }
 
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
 
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
 
+        [Column(Name = "work")]
         public string WorkPhone { get; set; }
 
+        [Column(Name = "fax")]
         public string Fax { get; set; }
 
+        [Column(Name = "email")]
         public string Email { get; set; }
 
+        [Column(Name = "email2")]
         public string Email2 { get; set; }
 
+        [Column(Name = "email3")]
         public string Email3 { get; set; }
 
+        [Column(Name = "homepage")]
         public string HomePage { get; set; }
 
+        [Column(Name = "bday")]
         public string BirthDay { get; set; }
 
+        [Column(Name = "bmonth")]
         public string BirthMonth { get; set; }
 
+        [Column(Name = "byear")]
         public string BirthYear { get; set; }
 
+        [Column(Name = "aday")]
         public string AnniDay { get; set; }
 
+        [Column(Name = "amonth")]
         public string AnniMonth { get; set; }
 
+        [Column(Name = "ayear")]
         public string AnniYear { get; set; }
 
+        [Column(Name = "address2")]
         public string SecondaryAddress { get; set; }
 
+        [Column(Name = "phone2")]
         public string SecondaryHomePhone { get; set; }
 
+        [Column(Name = "notes")]
         public string Notes { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public string AllEmails
         {
@@ -394,6 +424,14 @@ namespace WebAddressbookTests
                                  LastName, FirstName, MiddleName, NickName, Company, Title, Address, HomePhone,
                                  WorkPhone, MobilePhone, Fax, Email, Email2, Email3, HomePage, BirthDay, BirthMonth,
                                  BirthYear, AnniDay, AnniMonth, AnniYear, SecondaryAddress, SecondaryHomePhone, Notes);
+        }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
         }
     }
 }
