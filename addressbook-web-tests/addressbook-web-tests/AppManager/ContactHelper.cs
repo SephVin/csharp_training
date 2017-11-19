@@ -72,6 +72,34 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+            return this;
+        }
+
+        public ContactHelper RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            
+            SelectGroupFromFilter(group.Name);
+            SelectContact(contact.Id);
+            CommitRemovingContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+
+            return this;
+        }
+
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -177,6 +205,30 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper SelectGroupFromFilter(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+            return this;
+        }
+
+        public ContactHelper SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+            return this;
+        }
+
+        public ContactHelper CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+            return this;
+        }
+
+        public ContactHelper CommitRemovingContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+            return this;
+        }
+
         public bool IsContactExist()
         {
             return IsElementPresent(By.Name("entry"));
@@ -223,6 +275,37 @@ namespace WebAddressbookTests
                 Create(data);
             }
 
+            return this;
+        }
+
+        public ContactHelper AddContactToGroupIfLinkNotExist(GroupData group)
+        {
+            List<ContactData> contactsInGroup = group.GetContacts();
+
+            if (contactsInGroup.Count == 0)
+                AddContactToGroup(GetContactList()[0], group);
+
+            return this;
+        }
+        public ContactHelper CreateContactLinkToGroupIfNotExist(int index)
+        {
+            manager.Navigator.OpenHomePage();
+
+            GroupData group = GroupData.GetAll()[index];
+            List<ContactData> oldContactsInGroupList = group.GetContacts();
+            if (oldContactsInGroupList.Count == 0)
+            {
+                AddContactToGroup(GetContactList()[index], group);
+                oldContactsInGroupList = group.GetContacts();
+            }
+
+            return this;
+        }
+
+
+        public ContactHelper ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
             return this;
         }
 
@@ -322,7 +405,7 @@ namespace WebAddressbookTests
                 NickName = nickName,
 
                 Company = company,
-                Title = title,                
+                Title = title,
                 Address = address,
 
                 HomePhone = homePhone,

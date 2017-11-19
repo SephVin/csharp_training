@@ -392,7 +392,7 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-            return (LastName + FirstName).GetHashCode();
+            return (LastName + FirstName + Id).GetHashCode();
         }
 
         public int CompareTo(ContactData other)
