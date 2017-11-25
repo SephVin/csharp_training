@@ -16,7 +16,6 @@ namespace addressbook_tests_autoit.Tests
         public void GroupRemovalTest()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-            GroupData toBeRemoved = oldGroups[0];
 
             app.Groups.Remove(0);
 
