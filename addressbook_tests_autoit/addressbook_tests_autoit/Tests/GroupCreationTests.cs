@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace addressbook_tests_autoit
 {
     [TestFixture]
-    public class GroupCreationTests : Testbase
+    public class GroupCreationTests : TestBase
     {
         [Test]
         public void GroupCreationTest()

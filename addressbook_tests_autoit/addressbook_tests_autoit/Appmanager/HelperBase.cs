@@ -5,8 +5,9 @@ namespace addressbook_tests_autoit
     public class HelperBase
     {
         protected ApplicationManager manager;
-        protected string WINTITLE;
         protected AutoItX3 aux;
+
+        protected string WINTITLE;
 
         public HelperBase(ApplicationManager manager)
         {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace addressbook_tests_autoit.Tests
+namespace addressbook_tests_autoit
 {
     [TestFixture]
-    class GroupRemovalTests : Testbase
+    class GroupRemovalTests : TestBase
     {
         [SetUp]
         public void Init()

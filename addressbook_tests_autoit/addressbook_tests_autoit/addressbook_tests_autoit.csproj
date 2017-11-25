@@ -59,7 +59,7 @@
     <Compile Include="Appmanager\HelperBase.cs" />
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="Tests\GroupRemovalTests.cs" />
-    <Compile Include="Tests\Testbase.cs" />
+    <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\GroupCreationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

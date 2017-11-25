@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace addressbook_tests_autoit
 {
-    public class Testbase
+    public class TestBase
     {
         public ApplicationManager app;
 
