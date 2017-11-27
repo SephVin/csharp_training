@@ -9,6 +9,8 @@ namespace addressbook_tests_white
 {
     public class ContactHelper : HelperBase
     {
+        private static string CONTACT_EDITOR_WINTITLE = "Contact Editor";
+
         public ContactHelper(ApplicationManager manager) : base(manager) { }
         
         public void Add(ContactData contact)
@@ -28,7 +30,7 @@ namespace addressbook_tests_white
         public Window InitContactCreation()
         {
             manager.MainWindow.Get<Button>("uxNewAddressButton").Click();
-            return manager.MainWindow.ModalWindow("Contact Editor");
+            return manager.MainWindow.ModalWindow(CONTACT_EDITOR_WINTITLE);
         }
 
         public void FillContactForm(Window contactEditorDialogue, ContactData contact)
