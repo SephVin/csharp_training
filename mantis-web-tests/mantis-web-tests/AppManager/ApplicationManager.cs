@@ -18,7 +18,6 @@ namespace mantis_web_tests
 
         protected LoginHelper loginHelper;
         protected MenuManagmentHelper menuManagmentHelper;
-
         protected ProjectManagementHelper projectManagementHelper;
         protected SidebarHelper sidebarHelper;
 

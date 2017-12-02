@@ -99,7 +99,6 @@ namespace mantis_web_tests
                                                    .FindElement(By.TagName("Table"))
                                                    .FindElement(By.TagName("tbody"))
                                                    .FindElements(By.TagName("tr"));
-
             if (tableRows.Count == 0)
             {
                 return list;

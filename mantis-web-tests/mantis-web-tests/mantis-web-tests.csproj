@@ -71,11 +71,11 @@
     <Compile Include="AppManager\SidebarHelper.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="Model\ProjectData.cs" />
-    <Compile Include="Tests\AuthTestBase.cs" />
-    <Compile Include="Tests\ProjectCreationTests.cs" />
+    <Compile Include="Tests\Base\AuthTestBase.cs" />
+    <Compile Include="Tests\ProjectTests\ProjectCreationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\ProjectRemovalTests.cs" />
-    <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Tests\ProjectTests\ProjectRemovalTests.cs" />
+    <Compile Include="Tests\Base\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
