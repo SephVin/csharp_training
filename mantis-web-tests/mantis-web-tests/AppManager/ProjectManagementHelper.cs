@@ -112,9 +112,9 @@ namespace mantis_web_tests
                 string status = cells[1].Text;
                 string enabled = "";
                 if (cells[2].Text == " ")
-                    enabled = "false";
+                    enabled = "False";
                 else
-                    enabled = "true";
+                    enabled = "True";
                 string viewState = cells[3].Text;
                 string description = cells[4].Text;
 

@@ -20,6 +20,7 @@ namespace mantis_web_tests
         protected MenuManagmentHelper menuManagmentHelper;
         protected ProjectManagementHelper projectManagementHelper;
         protected SidebarHelper sidebarHelper;
+        protected ApiHelper apiHelper;
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -35,6 +36,7 @@ namespace mantis_web_tests
             menuManagmentHelper = new MenuManagmentHelper(this, baseURL);
             projectManagementHelper = new ProjectManagementHelper(this);
             sidebarHelper = new SidebarHelper(this, baseURL);
+            apiHelper = new ApiHelper(this);
         }
 
         public static ApplicationManager GetInstance()
@@ -98,6 +100,14 @@ namespace mantis_web_tests
             get
             {
                 return sidebarHelper;
+            }
+        }
+
+        public ApiHelper API
+        {
+            get
+            {
+                return apiHelper;
             }
         }
     }

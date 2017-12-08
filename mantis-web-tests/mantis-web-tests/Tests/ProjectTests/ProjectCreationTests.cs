@@ -11,34 +11,33 @@ using System.Collections.Generic;
 namespace mantis_web_tests
 {
     [TestFixture]
-    public class ProjectCreationTests : AuthTestBase
+    public class ProjectCreationTests : TestBase
     {
         [SetUp]
         public void Init()
         {
-            app.ProjectManagement.DeleteProjectIfAlreadyExist(new ProjectData("test"));
+            app.API.DeleteProjectIfAlreadyExist(account, new ProjectData("test"));
         }
 
         [Test]
         public void ProjectCreationTest()
-        {
-            List<ProjectData> oldProjectsList = app.ProjectManagement.GetProjectsList();
+        {     
+            List<ProjectData> oldProjectsList = app.API.GetProjectsList(account);
 
-            ProjectData project = new ProjectData("test")
-            {                
-                Status = "в разработке",
-                ViewState = "публичная",
+            ProjectData project = new ProjectData("test1")
+            {     
+                Status = "development",
+                ViewState = "public",
                 Description = "Это тест",
-                Enabled = "true"
+                Enabled = "True"
             };
 
-            app.ProjectManagement.CreateProject(project);
+            app.API.CreateProject(account, project);
 
-            List<ProjectData> newProjectsList = app.ProjectManagement.GetProjectsList();
+            List<ProjectData> newProjectsList = app.API.GetProjectsList(account);
 
-            Assert.AreEqual(oldProjectsList.Count + 1, app.ProjectManagement.GetProjectsCount());
+            Assert.AreEqual(oldProjectsList.Count + 1, app.API.GetProjectsCount(account));
 
-            project.ViewState = "публичный"; // на списке проектов окончание "ый"
             oldProjectsList.Add(project);
             oldProjectsList.Sort();
             newProjectsList.Sort();

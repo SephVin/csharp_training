@@ -10,6 +10,7 @@ namespace mantis_web_tests
     public class TestBase
     {
         protected ApplicationManager app;
+        public AccountData account = new AccountData("administrator", "root");
 
         [SetUp]
         public void SetupApplicationManager()
